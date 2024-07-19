@@ -1,6 +1,6 @@
-*** Oh well, I am come back to my base in C++, ok I am working on parallel this and I make my project more simple to complex in step by step ***
-*** Hope that will work as well because my blackdot fork from Blender are messy ***
-*** So I keep two project as well and see which it is better ***
+- *** Oh well, I am come back to my base in C++, ok I am working on parallel this and I make my project more simple to complex in step by step ***- 
+- *** Hope that will work as well because my blackdot fork from Blender are messy ***
+- *** So I keep two project as well and see which it is better ***
 
 
 Blackdot
