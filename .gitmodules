@@ -1,0 +1,3 @@
+[submodule "src/renderer/fujiyama-renderer"]
+	path = src/renderer/fujiyama-renderer
+	url = https://github.com/threedslider/fujiyama-renderer.git
