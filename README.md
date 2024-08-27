@@ -26,7 +26,7 @@ Plan for adding/improving to Blackdot
 - [] New NPR shading
 - [] 3D Rendending
 	- [] Fujiyama
-	- [] Povray
+	- [] Appleseed
 - [] 3D Tracking
 - [] Cloth system
 - [] Advanced VFX compositing
