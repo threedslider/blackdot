@@ -87,6 +87,7 @@ Where can i find a tutorial for Blackdot ?
 
 
 What is Global Illumination ?
+-------------
 
 See [here](https://en.wikipedia.org/wiki/Global_illumination) for more explanation.
 
