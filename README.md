@@ -1,6 +1,12 @@
 - Oh well, I am come back to my base in C++, ok I am working on parallel this and I make my project more simple to complex in step by step. Hope that will work as well because my blackdot fork from Blender are messy so I keep two project as well and see which it is better.
 
 
+Cloning
+-------------
+The actual source code is contained one repository (Fujiyama renderer) referenced here as git submodules.
+
+Type as : git clone --recurse-submodules https://github.com/threedslider/blackdot-cc.git
+
 Blackdot
 -------------
 
@@ -12,7 +18,7 @@ rendering, compositing, motion tracking and video editing.
 Plan for adding/improving to Blackdot
 -------------
 
-- [] UI from Softimage XSI
+- [] UI from Softimage XSI (Wip)
 - [] Tools in 3D modeling (based on Softimage XSI) (Wip)
 - [] OOM (Oriented Object Modeling)
 - [] Metamesh modeling
@@ -98,17 +104,18 @@ Is it possible to write new modules or plug-ins ?
 
   The kernel of Blackdot is not yet currently being written. This soon new
   architecture will allow:
-    + plug-ins in Python and Angelscript
-    + multiple material type, multiple renderer to be used
-    + multiple kinds of GUI's.
-	+ Tools for modelling and other stuffs.
+  -  + plug-ins in Python and Angelscript
+  -  + multiple material type, multiple renderer to be used
+  -  + multiple kinds of GUI's.
+	-  + Tools for modelling and other stuffs.
 
 
 
 Does Blackdot exports to POV scene ?
 -------------
 
-  Not yet but currently I integrate to Fujiyama Renderer into to Blackdot. Later Blackdot will exports to POV scene to geometry (vertices, normals and triangles), camera and materials.
+  Not yet but currently I integrate to Fujiyama Renderer into to Blackdot. 
+  Later Blackdot will exports to POV scene to geometry (vertices, normals and triangles), camera and materials.
 
 
 
@@ -122,6 +129,7 @@ Do you plan to integrate shaders into the Blackdot renderer ?
 Do you plan to write a GTK+ or QT GUI for Blackdot ?
 ----------------------------------------------------------------------------
 
-  No, The architecture that i am currently writing is by me (WIP) and powered with OpenGL and Vulkan. (Watch to the soon at the gui_xsi directory)
+  No, The architecture that i am currently writing is by me (WIP) and powered with OpenGL and Vulkan.
+   (Watch to the soon at the gui_xsi directory)
 
 

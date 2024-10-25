@@ -202,14 +202,30 @@ public:
         cout << "x: " << x << " y: " << y << " z: " << z << endl;
     }
 
-    friend ostream& operator<<(ostream& os, const Vector<T>& dt);
+    T print_x()
+    {
+        return x; 
+    }
+
+    T print_y()
+    {
+        return y;
+    }
+
+    T print_z()
+    {
+        return z;
+    }
+
+    template <class U>
+    friend ostream& operator<<(ostream& os, const Vector<U>& dt);
 };
 
 
 template <class T>
 ostream& operator<<(ostream& os, const Vector<T>& dt)
 {
-    os << dt.x << '/' << dt.y << '/' << dt.z;
+    os << "x: " << dt.x << " y: " << dt.y << " z: " << dt.z << endl;
     return os;
 }
 
@@ -373,13 +389,14 @@ public:
         cout << "x: " << x << " y: " << y << " z: " << z << endl;
     }
 
-    friend ostream& operator<<(ostream& os, const Point<T>& dt);
+    template <class U>
+    friend ostream& operator<<(ostream& os, const Point<U>& dt);
 };
 
 template <class T>
 ostream& operator<<(ostream& os, const Point<T>& dt)
 {
-    os << dt.x << '/' << dt.y << '/' << dt.z;
+    os << "x: " << dt.x << " y: " << dt.y << " z: " << dt.z << endl;
     return os;
 }
 

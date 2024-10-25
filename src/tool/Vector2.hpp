@@ -334,11 +334,6 @@ class Point2D
         return Point<T>(::max(x, p.x),
                         ::max(y, p.y));
     }
-
-
-
-
-
 };
 
 }

@@ -46,6 +46,8 @@ int main()
 
     result_vector =  p1 - p2;
 
+    cout <<  result_vector << endl;
+
     result_vector.print();
 
 
