@@ -107,7 +107,7 @@ Is it possible to write new modules or plug-ins ?
   -  + plug-ins in Python and Angelscript
   -  + multiple material type, multiple renderer to be used
   -  + multiple kinds of GUI's.
-	-  + Tools for modelling and other stuffs.
+  -  + Tools for modelling and other stuffs.
 
 
 
