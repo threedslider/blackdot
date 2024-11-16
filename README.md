@@ -1,4 +1,7 @@
-- Oh well, I am come back to my base in C++, ok I am working on parallel this and I make my project more simple to complex in step by step. Hope that will work as well because my blackdot fork from Blender are messy so I keep two project as well and see which it is better.
+Info
+------------
+- This is my base in C++, I am working in parallel and I make my project more simple to complex in step by step. 
+- I keep two project as well and see which it is better.
 
 
 Cloning
@@ -22,22 +25,26 @@ Plan for adding/improving to Blackdot
 - [] Tools in 3D modeling (based on Softimage XSI) (Wip)
 - [] OOM (Oriented Object Modeling)
 - [] Metamesh modeling
+- [] Sculpting 3D
+- [] Animation and rigging
 - [] ICE system (based inspiration from geomety nodes)
 	- [] Particles
 	- [] Deform
 	- [] Kinematic
 	- [] CrowdFX
 - [] Hair system
+- [] Fluid simulation
 - [] Advanced 3D painting
 - [] New NPR shading
-- [] 3D Rendending
-	- [] Fujiyama
-	- [] Appleseed
+- [] 3D Rendending : Fujiyama renderer and his improvement later
 - [] 3D Tracking
 - [] Cloth system
+- [] Soft and rigid body system
 - [] Advanced VFX compositing
 - [] Advanced video editor 
-- [] AngelScript editor
+- [] Support to Python scripting
+- [] Support to AngelScript
+- [] Editor scripting
 
 
 Development
@@ -65,11 +72,10 @@ Blackdot as a whole is licensed under the GNU General Public License, Version 3.
 Thanks
 -------------
 
-Blackdot give to tribute at Daniel Langlois and I thank much him the creator of Softimage XSI, a 3d software loved by a lot of 3d Artists around the world. 
-I thank as well to the french man and developer named Stephane Rehel for first 3D software and open source from Softimage 3D classic with his software as Moonlight Creator and later Moonlight Atelier. 
-I am inspired by two peoples and hope I will bright to you for your enjoy with this Blackdot too in 3D.
+- Blackdot give to tribute at Daniel Langlois and I thank much at him the creator of Softimage, a 3d software loved by a lot of 3d Artists around the world. 
+I am inspired by him and hope I will bright to you for your enjoy with this Blackdot too in 3D.
 
-- Thanks to Ton Roosendaal for the awesome Blender and help me to understand from codes.
+- Thanks to Ton Roosendaal for the awesome Blender and help me to understand from source codes.
 
 
 
@@ -108,14 +114,6 @@ Is it possible to write new modules or plug-ins ?
   -  + multiple material type, multiple renderer to be used
   -  + multiple kinds of GUI's.
   -  + Tools for modelling and other stuffs.
-
-
-
-Does Blackdot exports to POV scene ?
--------------
-
-  Not yet but currently I integrate to Fujiyama Renderer into to Blackdot. 
-  Later Blackdot will exports to POV scene to geometry (vertices, normals and triangles), camera and materials.
 
 
 
