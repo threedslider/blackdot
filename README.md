@@ -1,8 +1,6 @@
 Info
 ------------
-- This is my base in C++, I am working in parallel and I make my project more simple to complex in step by step. 
-- I keep two project as well and see which it is better.
-
+- This is my base in C++, I am working on my project for more simple to complex in step by step. 
 
 Cloning
 -------------
@@ -50,7 +48,7 @@ Plan for adding/improving to Blackdot
 Development
 -------------
 
-It will support to Vulkan and OpenGL.
+It will support to Vulkan.
 
 It will support to AngelScript and Python.
 
@@ -74,8 +72,6 @@ Thanks
 
 - Blackdot give to tribute at Daniel Langlois and I thank much at him the creator of Softimage, a 3d software loved by a lot of 3d Artists around the world. 
 I am inspired by him and hope I will bright to you for your enjoy with this Blackdot too in 3D.
-
-- Thanks to Ton Roosendaal for the awesome Blender and help me to understand from source codes.
 
 
 
@@ -104,7 +100,6 @@ What is Global Illumination ?
 See [here](https://en.wikipedia.org/wiki/Global_illumination) for more explanation.
 
 
-
 Is it possible to write new modules or plug-ins ?
 -------------
 
@@ -116,12 +111,10 @@ Is it possible to write new modules or plug-ins ?
   -  + Tools for modelling and other stuffs.
 
 
-
 Do you plan to integrate shaders into the Blackdot renderer ?
 -------------
 
   Why not! Based on Fujiyama Renderer, I will bright more shaders and create one on your own as well.
-
 
 
 Do you plan to write a GTK+ or QT GUI for Blackdot ?
