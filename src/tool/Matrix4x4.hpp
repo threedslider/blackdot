@@ -70,14 +70,14 @@ namespace Blackdot
 
         void setRotation(const Vector<T>& axis, double angle);
 
-        void setScale(const Vector3D<T>& scale);
-        void setTranslation(const Vector3D<T>& translation);
+        void setScale(const Vector<T>& scale);
+        void setTranslation(const Vector<T>& translation);
         void setRotationX(double angle);
         void setRotationY(double angle);
         void setRotationZ(double angle);
-        void setRotation(const Vector3D<T>& axis, double angle);
+        void setRotation(const Vector<T>& axis, double angle);
 
-        void setTransformation(const Vector3D<T>& scale, const Vector3D<T>& rotation, const Vector3D<T>& translation);
+        void setTransformation(const Vector<T>& scale, const Vector<T>& rotation, const Vector<T>& translation);
 
         void print() const;
 

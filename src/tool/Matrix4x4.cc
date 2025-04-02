@@ -334,11 +334,11 @@ namespace Blackdot
     }
 
     template<typename T>
-    Vector3D<T> Matrix4x4<T>::applyTransformation(const Vector3D<T>& v) const {
+    Vector<T> Matrix4x4<T>::applyTransformation(const Vector<T>& v) const {
         T x = m[0][0] * v.x + m[0][1] * v.y + m[0][2] * v.z + m[0][3];
         T y = m[1][0] * v.x + m[1][1] * v.y + m[1][2] * v.z + m[1][3];
         T z = m[2][0] * v.x + m[2][1] * v.y + m[2][2] * v.z + m[2][3];
-        return Vector3D<T>(x, y, z);
+        return Vector<T>(x, y, z);
     }
 
     template<typename T>
@@ -381,7 +381,7 @@ namespace Blackdot
     }
   
     template<typename T>
-    void Matrix4x4<T>::setScale(const Vector3D<T>& scale) {
+    void Matrix4x4<T>::setScale(const Vector<T>& scale) {
         *this = Matrix4x4<T>(
             scale.x, 0, 0, 0,
             0, scale.y, 0, 0,
@@ -391,7 +391,7 @@ namespace Blackdot
     }
 
     template<typename T>
-    void Matrix4x4<T>::setTranslation(const Vector3D<T>& translation) {
+    void Matrix4x4<T>::setTranslation(const Vector<T>& translation) {
         *this = Matrix4x4<T>(
             1, 0, 0, translation.x,
             0, 1, 0, translation.y,
@@ -401,8 +401,8 @@ namespace Blackdot
     }
     
     template<typename T>
-    void Matrix4x4<T>::setRotation(const Vector3D<T>& axis, double angle) {
-        Vector3D<T> u = axis.normalized();
+    void Matrix4x4<T>::setRotation(const Vector<T>& axis, double angle) {
+        Vector<T> u = axis.normalized();
         double cosAngle = cos(angle);
         double sinAngle = sin(angle);
         double oneMinusCos = 1.0 - cosAngle;
@@ -416,7 +416,7 @@ namespace Blackdot
     }   
 
     template<typename T>
-    void Matrix4x4<T>::setTransformation(const Vector3D<T>& scale, const Vector3D<T>& rotation, const Vector3D<T>& translation) {
+    void Matrix4x4<T>::setTransformation(const Vector<T>& scale, const Vector<T>& rotation, const Vector<T>& translation) {
         
         Matrix4x4<T> scaleMatrix;
         scaleMatrix.setScale(scale);
