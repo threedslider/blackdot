@@ -1,6 +1,6 @@
 /* 
 This file is part of Blackdot
-Copyright (C) 2024 Laurent Le Flem
+Copyright (C) 2024-2025 Laurent Le Flem
 
 This program is free software: you can redistribute it and/or modify it under 
 the terms of the GNU General Public License as published by the Free Software Foundation, 
@@ -19,7 +19,7 @@ Vector.hpp
 
 Vector and Point classes
 
-July 2024
+July 2024 : Creation
 */
 
 #ifndef __Vector_hpp
