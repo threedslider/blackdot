@@ -53,10 +53,11 @@ namespace Blackdot
       Matrix3x3 inverse() const;
       T quadraticForm(const Vector<T>& v) const;
 
-      Matrix3x3 scale(T sx, T sy, T sz) const;
+      Matrix3x3 scale(const Vector<T>& s) const;
       static Matrix3x3 rotateX(T angle);
       static Matrix3x3 rotateY(T angle);
       static Matrix3x3 rotateZ(T angle);
+      Matrix3x3 rotation(const Vector<T>& axis, T angle);
 
       Vector<T> cramer(const Vector<T>& b) const;
   };

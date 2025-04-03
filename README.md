@@ -1,6 +1,7 @@
 Info
 ------------
 - This is my base in C++, I am working on my project for more simple to complex in step by step. 
+So it is heavily in WIP :).
 
 Cloning
 -------------

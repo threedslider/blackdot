@@ -15,7 +15,7 @@ If not, see <https://www.gnu.org/licenses/>.
 */
 
 /*
-  Matrix4x4.C
+  Matrix4x4.cc
 
   Homogeneous vectors & matrices classes, 
  
@@ -92,23 +92,52 @@ namespace Blackdot
     }
 
     template<typename T>
-    Matrix4x4<T> Matrix4x4<T>::scale(T sx, T sy, T sz) {
+    Matrix4x4<T> Matrix4x4<T>::rotate(const Vector<T>& axis, T angle) {
+        T rad = angle * M_PI / 180.0;  
+        T cosA = cos(rad);
+        T sinA = sin(rad);
+        T oneMinusCos = 1 - cosA;
+
+        T x = axis.x, y = axis.y, z = axis.z;
+
+        
         return Matrix4x4<T>(
-            sx, 0, 0, 0,
-            0, sy, 0, 0,
-            0, 0, sz, 0,
+            cosA + oneMinusCos * x * x,       oneMinusCos * x * y - z * sinA, oneMinusCos * x * z + y * sinA, 0,
+            oneMinusCos * y * x + z * sinA,   cosA + oneMinusCos * y * y,     oneMinusCos * y * z - x * sinA, 0,
+            oneMinusCos * z * x - y * sinA,   oneMinusCos * z * y + x * sinA, cosA + oneMinusCos * z * z,     0,
             0, 0, 0, 1
         );
     }
 
     template<typename T>
-    Matrix4x4<T> Matrix4x4<T>::translate(T tx, T ty, T tz) {
+    Matrix4x4<T> Matrix4x4<T>::scaleMatrix(const Vector<T>& scale) {
         return Matrix4x4<T>(
-            1, 0, 0, tx,
-            0, 1, 0, ty,
-            0, 0, 1, tz,
+            scale.x, 0, 0, 0,
+            0, scale.y, 0, 0,
+            0, 0, scale.z, 0,
             0, 0, 0, 1
         );
+    }
+    
+   
+    template<typename T>
+    Matrix4x4<T> Matrix4x4<T>::translate(const Vector<T>& translation) {
+        return Matrix4x4<T>(
+            1, 0, 0, translation.x,
+            0, 1, 0, translation.y,
+            0, 0, 1, translation.z,
+            0, 0, 0, 1
+        );
+    }
+    
+
+    template<typename T>
+    Matrix4x4<T> Matrix4x4<T>::transformation(const Vector<T>& scale, const Vector<T>& rotationAxis, T rotationAngle, const Vector<T>& translation) {
+        Matrix4x4<T> scaleMat = scaleMatrix(scale);
+        Matrix4x4<T> rotateMat = rotate(rotationAxis, rotationAngle);
+        Matrix4x4<T> translateMat = translate(translation);
+    
+        return translateMat * rotateMat * scaleMat;  
     }
 
     template<typename T>
@@ -187,7 +216,7 @@ namespace Blackdot
                 m[i][j] += other.m[i][j];
             }
         }
-        return *this;  // Retourne l'objet courant pour permettre les chaines d'affectation
+        return *this;  
     }
 
     template<typename T>
@@ -197,7 +226,7 @@ namespace Blackdot
                 m[i][j] -= other.m[i][j];
             }
         }
-        return *this;  // Retourne l'objet courant pour permettre les chaines d'affectation
+        return *this;  
     }
 
     template<typename T>
@@ -213,14 +242,14 @@ namespace Blackdot
             }
         }
 
-        // Copie du résultat dans la matrice actuelle
+        
         for (int i = 0; i < 4; ++i) {
             for (int j = 0; j < 4; ++j) {
                 m[i][j] = result.m[i][j];
             }
         }
 
-        return *this;  // Retourne l'objet courant pour permettre les chaines d'affectation
+        return *this;  
     }
 
     template<typename T>
@@ -234,7 +263,7 @@ namespace Blackdot
                 m[i][j] /= scalar;
             }
         }
-        return *this;  // Retourne l'objet courant pour permettre les chaines d'affectation
+        return *this;  
     }
 
     template<typename T>
@@ -339,104 +368,6 @@ namespace Blackdot
         T y = m[1][0] * v.x + m[1][1] * v.y + m[1][2] * v.z + m[1][3];
         T z = m[2][0] * v.x + m[2][1] * v.y + m[2][2] * v.z + m[2][3];
         return Vector<T>(x, y, z);
-    }
-
-    template<typename T>
-    void Matrix4x4<T>::setRotationX(double angle) {
-        double cosAngle = cos(angle);
-        double sinAngle = sin(angle);
-
-        *this = Matrix4x4<T>(
-            1, 0, 0, 0,
-            0, cosAngle, -sinAngle, 0,
-            0, sinAngle, cosAngle, 0,
-            0, 0, 0, 1
-        );
-    }
-
-    template<typename T>
-    void Matrix4x4<T>::setRotationY(double angle) {
-        double cosAngle = cos(angle);
-        double sinAngle = sin(angle);
-
-        *this = Matrix4x4<T>(
-            cosAngle, 0, sinAngle, 0,
-            0, 1, 0, 0,
-            -sinAngle, 0, cosAngle, 0,
-            0, 0, 0, 1
-        );
-    }
-   
-    template<typename T>
-    void Matrix4x4<T>::setRotationZ(double angle) {
-        double cosAngle = cos(angle);
-        double sinAngle = sin(angle);
-
-        *this = Matrix4x4<T>(
-            cosAngle, -sinAngle, 0, 0,
-            sinAngle, cosAngle, 0, 0,
-            0, 0, 1, 0,
-            0, 0, 0, 1
-        );
-    }
-  
-    template<typename T>
-    void Matrix4x4<T>::setScale(const Vector<T>& scale) {
-        *this = Matrix4x4<T>(
-            scale.x, 0, 0, 0,
-            0, scale.y, 0, 0,
-            0, 0, scale.z, 0,
-            0, 0, 0, 1
-        );
-    }
-
-    template<typename T>
-    void Matrix4x4<T>::setTranslation(const Vector<T>& translation) {
-        *this = Matrix4x4<T>(
-            1, 0, 0, translation.x,
-            0, 1, 0, translation.y,
-            0, 0, 1, translation.z,
-            0, 0, 0, 1
-        );
-    }
-    
-    template<typename T>
-    void Matrix4x4<T>::setRotation(const Vector<T>& axis, double angle) {
-        Vector<T> u = axis.normalized();
-        double cosAngle = cos(angle);
-        double sinAngle = sin(angle);
-        double oneMinusCos = 1.0 - cosAngle;
-
-        *this = Matrix4x4<T>(
-            cosAngle + u.x * u.x * oneMinusCos, u.x * u.y * oneMinusCos - u.z * sinAngle, u.x * u.z * oneMinusCos + u.y * sinAngle, 0,
-            u.y * u.x * oneMinusCos + u.z * sinAngle, cosAngle + u.y * u.y * oneMinusCos, u.y * u.z * oneMinusCos - u.x * sinAngle, 0,
-            u.z * u.x * oneMinusCos - u.y * sinAngle, u.z * u.y * oneMinusCos + u.x * sinAngle, cosAngle + u.z * u.z * oneMinusCos, 0,
-            0, 0, 0, 1
-        );
-    }   
-
-    template<typename T>
-    void Matrix4x4<T>::setTransformation(const Vector<T>& scale, const Vector<T>& rotation, const Vector<T>& translation) {
-        
-        Matrix4x4<T> scaleMatrix;
-        scaleMatrix.setScale(scale);
-    
-        
-        Matrix4x4<T> rotationXMatrix;
-        rotationXMatrix.setRotationX(rotation.x);
-        
-        Matrix4x4<T> rotationYMatrix;
-        rotationYMatrix.setRotationY(rotation.y);
-    
-        Matrix4x4<T> rotationZMatrix;
-        rotationZMatrix.setRotationZ(rotation.z);
-    
-        
-        Matrix4x4<T> translationMatrix;
-        translationMatrix.setTranslation(translation);
-    
-        // To apply transformations in order : scale -> rotation -> translation
-        *this = translationMatrix * rotationZMatrix * rotationYMatrix * rotationXMatrix * scaleMatrix;
     }
 
     template<typename T>

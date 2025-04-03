@@ -14,45 +14,45 @@ You should have received a copy of the GNU General Public License along with thi
 If not, see <https://www.gnu.org/licenses/>.
 */
 
-
 /*
-  CommonMath.hpp
+  Face.hpp
 
-  General C++ Definitions
-
-  April 2025
+  April 3 2025 
 */
 
-#ifndef __CommonMath_hpp
-#define __CommonMath_hpp
+#ifndef Face_hpp
+#define Face_hpp
 
-#include <cmath>
+#include "Vertex.hpp"
+#include "Edge.hpp"
+#include <vector>
 
 namespace Blackdot
 {
 
-    #ifndef M_2PI
-    #define M_2PI (2.*M_PI)
-    #endif
-
-    //extern double doubleTolerance;
-    //extern double distanceTolerance;
-    //extern double angleTolerance;
-
-    template<class T>
-    inline T DEGtoRAD(T d) {d  * (M_PI/180.);}
-
-    template<class T>
-    inline T RADtoDEG(T d) {d * (180./M_PI);}
-
-    template<class T>
-    inline T sqr( T k ) { return k * k; }
-
-    inline float cube( float k ) { return k * k * k; }
-    inline double cube( double k ) { return k * k * k; }
-
-    template<class T>
-    inline bool sameSign(T d1, T d2) { return (d1>=(T)(0)) ? (d2>=(T)(0)) : (d2<=(T)(0));}
-
+  class Face {
+    public:
+        int id;                 // ID unique de la face
+        std::vector<Edge> edges; // Liste des arêtes de la face
+    
+        // Constructeur
+        Face(int id) : id(id) {}
+    
+        // Ajouter une arête à la face
+        void addEdge(const Edge& edge) {
+            edges.push_back(edge);
+        }
+    
+        // Affichage de la face avec ses edges
+        void print(std::vector<Vertex>& vertices)  {
+            printf("Face ID %d: \n", id);
+            for ( auto& edge : edges) {
+                edge.print(vertices);
+            }
+        }
+    };
 
 }
+#endif
+
+

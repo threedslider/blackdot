@@ -14,6 +14,13 @@ You should have received a copy of the GNU General Public License along with thi
 If not, see <https://www.gnu.org/licenses/>.
 */
 
+/*
+  Matrix3x3.cc
+
+  
+  April 2 2025 
+*/
+
 #include "Matrix3x3.hpp"
 #include <stdexcept>
 
@@ -139,11 +146,11 @@ T Matrix3x3<T>::quadraticForm(const Vector<T>& v) const {
 }
 
 template <typename T>
-Matrix3x3<T> Matrix3x3<T>::scale(T sx, T sy, T sz) const {
+Matrix3x3<T> Matrix3x3<T>::scale(const Vector<T>& s) const {
     return Matrix3x3(
-        mat[0][0] * sx, mat[0][1] * sy, mat[0][2] * sz,
-        mat[1][0] * sx, mat[1][1] * sy, mat[1][2] * sz,
-        mat[2][0] * sx, mat[2][1] * sy, mat[2][2] * sz
+        mat[0][0] * s.x, mat[0][1] * s.y, mat[0][2] * s.z,
+        mat[1][0] * s.x, mat[1][1] * s.y, mat[1][2] * s.z,
+        mat[2][0] * s.x, mat[2][1] * s.y, mat[2][2] * s.z
     );
 }
 
@@ -174,6 +181,18 @@ Matrix3x3<T> Matrix3x3<T>::rotateZ(T angle) {
         c, -s, 0,
         s, c, 0,
         0, 0, 1
+    );
+}
+
+Matrix3x3 rotation(const Vector<T>& axis, T angle) {
+    T c = cos(angle);
+    T s = sin(angle);
+    T t = 1 - c;
+
+    return Matrix3x3(
+        t * axis.x * axis.x + c, t * axis.x * axis.y - s * axis.z, t * axis.x * axis.z + s * axis.y,
+        t * axis.x * axis.y + s * axis.z, t * axis.y * axis.y + c, t * axis.y * axis.z - s * axis.x,
+        t * axis.x * axis.z - s * axis.y, t * axis.y * axis.z + s * axis.x, t * axis.z * axis.z + c
     );
 }
 

@@ -28,6 +28,7 @@ July 2024 : Creation
 #include <iostream>
 #include <cmath>
 
+
 using namespace std;
 
 namespace Blackdot

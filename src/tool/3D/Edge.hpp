@@ -14,45 +14,40 @@ You should have received a copy of the GNU General Public License along with thi
 If not, see <https://www.gnu.org/licenses/>.
 */
 
-
 /*
-  CommonMath.hpp
+  Edge.hpp
 
-  General C++ Definitions
-
-  April 2025
+  April 3 2025 
 */
 
-#ifndef __CommonMath_hpp
-#define __CommonMath_hpp
+#ifndef EDGE_HPP
+#define EDGE_HPP
 
-#include <cmath>
+#include <vector>
+#include "Vertex.hpp"
+
 
 namespace Blackdot
 {
 
-    #ifndef M_2PI
-    #define M_2PI (2.*M_PI)
-    #endif
-
-    //extern double doubleTolerance;
-    //extern double distanceTolerance;
-    //extern double angleTolerance;
-
-    template<class T>
-    inline T DEGtoRAD(T d) {d  * (M_PI/180.);}
-
-    template<class T>
-    inline T RADtoDEG(T d) {d * (180./M_PI);}
-
-    template<class T>
-    inline T sqr( T k ) { return k * k; }
-
-    inline float cube( float k ) { return k * k * k; }
-    inline double cube( double k ) { return k * k * k; }
-
-    template<class T>
-    inline bool sameSign(T d1, T d2) { return (d1>=(T)(0)) ? (d2>=(T)(0)) : (d2<=(T)(0));}
-
+  class Edge {
+    public:
+        int id;        
+        int vertexIndex1;  
+        int vertexIndex2;  
+    
+        // Constructeur
+        Edge(int id, int vertexIndex1, int vertexIndex2)
+            : id(id), vertexIndex1(vertexIndex1), vertexIndex2(vertexIndex2) {}
+    
+        void print(std::vector<Vertex>& vertices) {
+            printf("Edge ID %d: ", id);
+            vertices[vertexIndex1].print();
+            vertices[vertexIndex2].print();
+        }
+    };
 
 }
+#endif
+
+

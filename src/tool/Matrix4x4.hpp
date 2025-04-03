@@ -14,6 +14,13 @@ You should have received a copy of the GNU General Public License along with thi
 If not, see <https://www.gnu.org/licenses/>.
 */
 
+/*
+  Matrix4x4.hpp
+
+  
+  April 2 2025 
+*/
+
 
 #ifndef __Matrix4x4_hpp
 #define __Matrix4X4_hpp
@@ -44,8 +51,12 @@ namespace Blackdot
         static Matrix4x4<T> rotateX(T angle);
         static Matrix4x4<T> rotateY(T angle);
         static Matrix4x4<T> rotateZ(T angle);
-        static Matrix4x4<T> scale(T sx, T sy, T sz);
-        static Matrix4x4<T> translate(T tx, T ty, T tz);
+        static Matrix4x4<T> rotate(const Vector<T>& axis, T angle);
+        static Matrix4x4<T> scaleMatrix(const Vector<T>& scale);
+        static Matrix4x4<T> translate(const Vector<T>& translation);
+        static Matrix4x4<T> transformation(const Vector<T>& scale, const Vector<T>& rotationAxis, T rotationAngle, const Vector<T>& translation);
+
+
 
         Matrix4x4<T> operator+(const Matrix4x4<T>& other) const;
         Matrix4x4<T> operator-(const Matrix4x4<T>& other) const;
@@ -67,17 +78,6 @@ namespace Blackdot
         Matrix4x4<T> mult3x4(const Matrix4x4<T>& m3x4) const;
         
         Vector<T> applyTransformation(const Vector<T>& v) const;
-
-        void setRotation(const Vector<T>& axis, double angle);
-
-        void setScale(const Vector<T>& scale);
-        void setTranslation(const Vector<T>& translation);
-        void setRotationX(double angle);
-        void setRotationY(double angle);
-        void setRotationZ(double angle);
-        void setRotation(const Vector<T>& axis, double angle);
-
-        void setTransformation(const Vector<T>& scale, const Vector<T>& rotation, const Vector<T>& translation);
 
         void print() const;
 

@@ -23,40 +23,53 @@ Laurent Le Flem
 August 06 2024 (My great day !)
 */
 
+#include "gui_xsi/graphic/InitGL.hpp"
 #include "tool/Vector.hpp"
-#include "tool/Vector2.hpp"
+#include "tool/3D/Vertex.hpp"
+#include "tool/3D/Edge.hpp"
+#include "tool/3D/Face.hpp"
+#include "3D/scene/mesh/Mesh.hpp"
 
 using namespace Blackdot;
 
-int main()
-{
-    Vector<float> v1(5.2f, 10.0f, 50.0f);
-
-    Point<float> p1(100.0f, 50.0f, 200.0f);
-
-    Point<float> p2(10.0f, 10.0f, 20.0f);
-
-    Point<float> result;
-
-    result =  p1 - v1;
-
-    result.print();
-
-    Vector<float> result_vector;
-
-    result_vector =  p1 - p2;
-
-    cout <<  result_vector << endl;
-
-    result_vector.print();
-
-
-    Vector2D<float> v2(10.0f, 5.0f);
-    Point2D<float> p3(100.0f, 50.0f);
-    Point2D<float> r2;
-
-    r2 = p3 - v2;
+int main() {
     
-    return 0;
+    Mesh mesh;
 
+    
+    mesh.addVertex(-1.0f, -1.0f, -1.0f);  // Vertex 1
+    mesh.addVertex( 1.0f, -1.0f, -1.0f);  // Vertex 2
+    mesh.addVertex( 1.0f,  1.0f, -1.0f);  // Vertex 3
+    mesh.addVertex(-1.0f,  1.0f, -1.0f);  // Vertex 4
+    mesh.addVertex(-1.0f, -1.0f,  1.0f);  // Vertex 5
+    mesh.addVertex( 1.0f, -1.0f,  1.0f);  // Vertex 6
+    mesh.addVertex( 1.0f,  1.0f,  1.0f);  // Vertex 7
+    mesh.addVertex(-1.0f,  1.0f,  1.0f);  // Vertex 8
+
+    
+    mesh.addEdge(0, 1); // 1-2
+    mesh.addEdge(1, 2); // 2-3
+    mesh.addEdge(2, 3); // 3-4
+    mesh.addEdge(3, 0); // 4-1
+    mesh.addEdge(4, 5); // 5-6
+    mesh.addEdge(5, 6); // 6-7
+    mesh.addEdge(6, 7); // 7-8
+    mesh.addEdge(7, 4); // 8-5
+    mesh.addEdge(0, 4); // 1-5
+    mesh.addEdge(1, 5); // 2-6
+    mesh.addEdge(2, 6); // 3-7
+    mesh.addEdge(3, 7); // 4-8
+
+    
+    mesh.addFace({0, 1, 2, 3}); // Face 1
+    mesh.addFace({4, 5, 6, 7}); // Face 2
+    mesh.addFace({0, 1, 5, 4}); // Face 3
+    mesh.addFace({1, 2, 6, 5}); // Face 4
+    mesh.addFace({2, 3, 7, 6}); // Face 5
+    mesh.addFace({3, 0, 4, 7}); // Face 6
+
+    
+    mesh.print();
+
+    return 0;
 }
