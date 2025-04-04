@@ -1,0 +1,2 @@
+add_subdirectory(graphic)
+add_subdirectory(glfw_wrapper)

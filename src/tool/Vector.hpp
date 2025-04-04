@@ -55,6 +55,10 @@ public:
     void sety(const T _y) {y = _y;} 
     void setz(const T _z) {z = _z;} 
 
+    void set_plus_assign_equalX(const T _x) {x += _x}
+    void set_plus_assign_equalY(const T _y) {x += _y}
+    void set_plus_assign_equalZ(const T _z) {x += _z}
+
     Vector<T>& operator=(const Vector<T>& v) 
     {
         x = v.x;

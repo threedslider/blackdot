@@ -20,8 +20,8 @@ If not, see <https://www.gnu.org/licenses/>.
   April 3 2025 
 */
 
-#ifndef Face_hpp
-#define Face_hpp
+#ifndef __Face_hpp
+#define __Face_hpp
 
 #include "Vertex.hpp"
 #include "Edge.hpp"
@@ -32,25 +32,34 @@ namespace Blackdot
 
   class Face {
     public:
-        int id;                 // ID unique de la face
-        std::vector<Edge> edges; // Liste des arêtes de la face
+        int id;     
+        Vertex* a;
+        Vertex* b;
+        Vertex* c;
+        std::vector<Edge> edges; 
     
-        // Constructeur
-        Face(int id) : id(id) {}
+        
+        Face(int id, Vertex* a, Vertex* b, Vertex* c ) : id(id), a(a), b(b), c(c)  {}
     
-        // Ajouter une arête à la face
+        
         void addEdge(const Edge& edge) {
             edges.push_back(edge);
         }
     
-        // Affichage de la face avec ses edges
+        
         void print(std::vector<Vertex>& vertices)  {
             printf("Face ID %d: \n", id);
             for ( auto& edge : edges) {
                 edge.print(vertices);
             }
         }
+
+        void ComputeNormal(Vertex* v1, Vertex* v2, Vertex* v3);
+
     };
+
+    typedef list<Face*>				_pFace;
+    typedef list<Face*>::iterator	_iFace;
 
 }
 #endif

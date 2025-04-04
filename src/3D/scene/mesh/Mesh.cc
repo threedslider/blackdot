@@ -14,9 +14,47 @@ You should have received a copy of the GNU General Public License along with thi
 If not, see <https://www.gnu.org/licenses/>.
 */
 
-
+#include <GLFW/glfw3.h>
 #include "Mesh.hpp"
 #include <iostream>
 
+namespace Blackdot
+{
+
+	void Mesh::DrawAxes()
+	{
+		glPushMatrix();
+		//		glDisable(GL_LIGHTING);
+
+		glBegin(GL_LINE_STRIP);
+		glColor3ub(255, 0, 0);
+		glVertex3f(0.0, 0.0, 0.0);
+		glVertex3f(10.0, 0.0, 0.0);
+		glVertex3f(7.5, 2.5, 0.0);
+		glVertex3f(7.5, -2.5, 0.0);
+		glVertex3f(10.0, 0.0, 0.0);
+		glVertex3f(10.0, 0.0, 0.0);
+		glEnd();
+		glBegin(GL_LINE_STRIP);
+		glVertex3f(0.0, 0.0, 0.0);
+		glVertex3f(0.0, 10.0, 0.0);
+		glVertex3f(0.0, 10.0, 0.0);
+		glVertex3f(2.5, 7.5, 0.0);
+		glVertex3f(-2.5, 7.5, 0.0);
+		glVertex3f(0.0, 10.0, 0.0);
+		glEnd();
+		glBegin(GL_LINE_STRIP);
+		glVertex3f(0.0, 0.0, 0.0);
+		glVertex3f(0.0, 0.0, 10.0);
+		glVertex3f(2.5, 0.0, 7.5);
+		glVertex3f(-2.5, 0.0, 7.5);
+		glVertex3f(0.0, 0.0, 10.0);
+		glVertex3f(0.0, 0.0, 10.0);
+		glEnd();
+
+		glPopMatrix();
+	}
+
+}
 
 

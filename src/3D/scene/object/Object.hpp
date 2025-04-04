@@ -14,43 +14,35 @@ You should have received a copy of the GNU General Public License along with thi
 If not, see <https://www.gnu.org/licenses/>.
 */
 
-/*
-  Edge.hpp
 
-  April 3 2025 
-*/
+#ifndef __Object_hpp
+#define __Object_hpp
 
-#ifndef __Edge_hpp
-#define __Edge_hpp
-
-#include <vector>
-#include "Vertex.hpp"
+#include "tool/3D/Vertex.hpp"
+#include "tool/3D/Face.hpp"
 
 
 namespace Blackdot
 {
 
-  class Edge {
+    class Object
+    {
     public:
-        int id;        
-        int vertexIndex1;  
-        int vertexIndex2;  
-    
-        
-        Edge(int id, int vertexIndex1, int vertexIndex2)
-            : id(id), vertexIndex1(vertexIndex1), vertexIndex2(vertexIndex2) {}
-    
-        void print(std::vector<Vertex>& vertices) {
-            printf("Edge ID %d: ", id);
-            vertices[vertexIndex1].print();
-            vertices[vertexIndex2].print();
-        }
+        _pVertex	pVertex;
+        _iVertex	iVertex;
+
+        _pFace		pFace;
+        _iFace		iFace;
+
+        Object();
+        ~Object();
+
+        void	Clear();
+
+        void	DrawVertex();
+        void	DrawFace();
     };
 
-    typedef list<Edge*>				  _pEdge;
-    typedef list<Edge*>::iterator	  _iEdge;
-
 }
-#endif
 
-
+#endif//_OBJECT_H

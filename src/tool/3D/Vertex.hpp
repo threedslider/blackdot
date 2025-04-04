@@ -22,29 +22,34 @@ If not, see <https://www.gnu.org/licenses/>.
 */
 
 
-#ifndef Vertex_hpp
-#define Vertex_hpp
+#ifndef __Vertex_hpp
+#define __Vertex_hpp
 
 
 #include "../Vector.hpp"
+#include <list>
 
 namespace Blackdot
 {
 
   class Vertex {
     public:
-        int id;        // ID unique du vertex
+        int id;        
+        bool	IsSelect;
         Vector<float> position;
     
-        // Constructeur
+        
         Vertex(int id, float x = 0.0f, float y = 0.0f, float z = 0.0f)
-            : id(id), position(x, y, z) {}
+            : id(id), position(x, y, z), IsSelect(false) {}
     
         void print() {
             printf("Vertex ID %d: ", id);
             position.print();
         }
     };
+
+    typedef list<Vertex*>				_pVertex;
+    typedef list<Vertex*>::iterator		_iVertex;
 
 }
 #endif

@@ -14,43 +14,54 @@ You should have received a copy of the GNU General Public License along with thi
 If not, see <https://www.gnu.org/licenses/>.
 */
 
-/*
-  Edge.hpp
 
-  April 3 2025 
-*/
-
-#ifndef __Edge_hpp
-#define __Edge_hpp
-
-#include <vector>
-#include "Vertex.hpp"
-
+#ifndef __Mouse_hpp
+#define __Mouse_hpp
 
 namespace Blackdot
 {
-
-  class Edge {
-    public:
-        int id;        
-        int vertexIndex1;  
-        int vertexIndex2;  
+    enum {
+        POINT=0,
+        LINE=1,
+        FILL=2
+    };
     
-        
-        Edge(int id, int vertexIndex1, int vertexIndex2)
-            : id(id), vertexIndex1(vertexIndex1), vertexIndex2(vertexIndex2) {}
+    enum {
+        ORTHO=0,
+        PERSP=1
+    };
     
-        void print(std::vector<Vertex>& vertices) {
-            printf("Edge ID %d: ", id);
-            vertices[vertexIndex1].print();
-            vertices[vertexIndex2].print();
-        }
+    enum {
+        SINGLE_VIEWPORT=1,
+        FOUR_VIEWPORT=0
     };
 
-    typedef list<Edge*>				  _pEdge;
-    typedef list<Edge*>::iterator	  _iEdge;
+    class Mouse
+    {
+        public:
+
+            int	state;
+            int	button;
+            int	active;	//Shift ,Ctrl
+
+            int	Left, Right;
+            int	Shift;
+            int	Ctrl;
+            int	Alt;
+            int	None;
+            int x;
+            int	y;
+
+            int	posx;
+            int	posy;
+
+            int	clicx;
+            int	clicy;
+
+            int	MouseIs;
+
+    };
 
 }
-#endif
 
-
+#endif//_MAIN_H

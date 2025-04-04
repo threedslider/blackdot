@@ -21,8 +21,8 @@ If not, see <https://www.gnu.org/licenses/>.
 */
 
 
-#ifndef Mesh_hpp
-#define Mesh_hpp
+#ifndef __Mesh_hpp
+#define __Mesh_hpp
 
 #include "tool/3D/Vertex.hpp"
 #include "tool/3D/Edge.hpp"
@@ -68,6 +68,9 @@ namespace Blackdot
                     face.print(vertices);
                 }
             }
+
+            void DrawAxes();
+
         };
 }
 
