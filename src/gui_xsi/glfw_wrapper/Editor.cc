@@ -19,53 +19,20 @@ If not, see <https://www.gnu.org/licenses/>.
 #include <iostream>
 #include "Editor.hpp"
 
-
-void mouseButtonCallback(GLFWwindow* Window, int button, int action, int mods)
-{
-	/*
-	mouse.posx=x;
-	mouse.posy=Height-y;
-	mouse.button=button;
-	mouse.state=state;
-	mouse.active=-1;
-	mouse.Alt=mouse.Shift=mouse.Ctrl=0;
-	mouse.Left=mouse.Right=0;
-	mouse.None=1;
-	*/
-
-	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
-
-		double mouseX, mouseY;
-		glfwGetCursorPos(Window, &mouseX, &mouseY);
-
-		int width, height;
-		glfwGetWindowSize(Window, &width, &height);
-
-		mouseY = height - mouseY;
-
-		Blackdot::Mouse(mouseX, mouseY);
-
-
-	}
-
-	switch (button)
-	{
-
-	case GLFW_MOUSE_BUTTON_LEFT:
-		Blackdot::Editor::mouse.Left = 1;
-		break;
-	case GLFW_MOUSE_BUTTON_RIGHT:
-		Blackdot::Editor::mouse.Right = 1;
-		break;
-	}
-
-}
-
-Blackdot::Mouse Blackdot::Editor::mouse;
-
 namespace Blackdot
 {
+	/*
 
+
+	void Editor::mouseLeft()
+	{
+		mouse.Left = 1;
+	}
+
+	void Editor::mouseRight()
+	{
+		mouse.Right = 1;
+	}*/
 
 Editor::Editor()
 {
@@ -112,13 +79,15 @@ void Editor::InitGL(int w, int h, char* title)
 
 	vs.Init(w, h);
 
-	glfwSetMouseButtonCallback(window, mouseButtonCallback);
+	//glfwSetMouseButtonCallback(window, mouseButtonCallback);
+
 
 	glEnable(GL_DEPTH_TEST); 
 
 }
 
-void Editor::Key(unsigned char key, int x, int y)
+/*
+void Editor::Key(unsigned char)
 {
 	switch(key)
 	{
@@ -156,15 +125,15 @@ void Editor::Key(unsigned char key, int x, int y)
 		break;
 	}
 }
-
+*/
 /*
-void Editor::KeySpec(int key, int x, int y)
+void Editor::KeySpec(int key)
 {
 	switch(key)
 	{
-	case GLUT_KEY_F12:	vs.InvSolo();		//inverse le mode Solo ou 4 vues
+	case GLFW_KEY_F1:	vs.InvSolo();		//inverse le mode Solo ou 4 vues
 		break;
-
+	
 	case GLUT_KEY_F1:	vs.SetWinSolo(1);	//met la vue 1 en solo
 		break;	
 	case GLUT_KEY_F2:	vs.SetWinSolo(2);	//met la vue 2 en solo
@@ -185,6 +154,7 @@ void Editor::KeySpec(int key, int x, int y)
 
 	case GLUT_KEY_INSERT:
 		break;
+		
 	default:
 		break;
 	}
@@ -193,16 +163,11 @@ void Editor::KeySpec(int key, int x, int y)
 */
 
 
-void Editor::Mouse(int x, int y)
+
+void Editor::Mouse_pos(int x, int y)
 {
-	mouse.clicx=mouse.x;			
-	mouse.clicy=mouse.y;			
-
-	mouse.x=x;						
-	mouse.y=Height-y;				
-
 	
-	vs.Mouse(mouse.x, mouse.y);		
+	vs.Mouse(x, y);		
 }
 
 void Editor::Reshape(int w, int h)
@@ -217,6 +182,8 @@ void Editor::Reshape(int w, int h)
 
 void Editor::DrawRun()
 {
+	bool Pressed = false;
+
 	while (!glfwWindowShouldClose(window)) {
 
 		Draw();
@@ -229,11 +196,114 @@ void Editor::DrawRun()
 		Height = height;
 
 		vs.Reshape(width, height);
-		
+
+		double mouseX, mouseY;
+		glfwGetCursorPos(window, &mouseX, &mouseY);
+
+		mouse.x = mouseX;
+		mouse.y = height - mouseY;
+
+
+		Mouse_pos(mouse.x, mouse.y);
+
 		glfwPollEvents();
+
+		if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS ) {
+			//mouse.Left = 1;
+			objectsystem.AddVertex(&mouse, vs.GetViewport());
+		}
+
+
+		if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS && glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS) {
+			//mouse.Left = 1;
+			objectsystem.SelectVertex (&mouse, vs.GetViewport());
+		}
+
+
+		if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS && glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS ) {
+			//mouse.Left = 1;
+			objectsystem.AddFace(&mouse, vs.GetViewport());
+		}
+
+		
+
+
+		if (glfwGetKey(window, GLFW_KEY_F5) == GLFW_PRESS && !Pressed) {
+			Pressed = true;
+			vs.InvSolo();
+		}
+
+		if (glfwGetKey(window, GLFW_KEY_F5) == GLFW_RELEASE) {
+			Pressed = false;
+			
+		}
+
+
+		if (glfwGetKey(window, GLFW_KEY_F5) == GLFW_RELEASE)
+		{
+
+			
+
+			if (glfwGetKey(window, GLFW_KEY_F1) == GLFW_PRESS && !Pressed) {
+				Pressed = true;
+				vs.SetWinSolo(1);
+			}
+
+			if (glfwGetKey(window, GLFW_KEY_F2) == GLFW_PRESS && !Pressed) {
+				Pressed = true;
+				vs.SetWinSolo(2);
+			}
+
+			if (glfwGetKey(window, GLFW_KEY_F3) == GLFW_PRESS && !Pressed) {
+				Pressed = true;
+				vs.SetWinSolo(3);
+			}
+
+			if (glfwGetKey(window, GLFW_KEY_F4) == GLFW_PRESS && !Pressed) {
+				Pressed = true;
+				vs.SetWinSolo(4);
+			}
+
+			if (glfwGetKey(window, GLFW_KEY_KP_SUBTRACT) == GLFW_PRESS && !Pressed) {
+				Pressed = true;
+				vs.ZoomOut(1);
+			}
+
+			if (glfwGetKey(window, GLFW_KEY_KP_ADD) == GLFW_PRESS && !Pressed) {
+				Pressed = true;
+				vs.ZoomIn(1);
+			}
+
+
+
+
+			if (glfwGetKey(window, GLFW_KEY_KP_7) == GLFW_PRESS && !Pressed) {
+				Pressed = true;
+				vs.ResetRotate(2);
+			}
+
+			if (glfwGetKey(window, GLFW_KEY_KP_1) == GLFW_PRESS && !Pressed) {
+				Pressed = true;
+				vs.ResetRotate(1);
+			}
+
+			if (glfwGetKey(window, GLFW_KEY_KP_3) == GLFW_PRESS && !Pressed) {
+				Pressed = true;
+				vs.ResetRotate(0);
+			}
+		}
+		else
+			Pressed = true;
+
+
+	
+		
+			
 	}
 
 	glfwTerminate();
+
+
 }
 
 void Editor::Draw()
@@ -273,7 +343,7 @@ void Editor::Draw()
 void Editor::DrawScene()
 {
 	objectsystem.Draw();				
-	//DrawAxes();
+	mesh.DrawAxes();
 }
 /*
 void Editor::Msg()

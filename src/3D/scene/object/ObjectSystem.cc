@@ -219,7 +219,7 @@ void ObjectSystem::AddFace(Mouse *mouse, Viewport *v)
 					obj.pFace.push_back(new Face(Faceid, GetVertex(tmpFace[0]),GetVertex(tmpFace[1]),GetVertex(tmpFace[2])));
 					cmpFace=0;
 					DeSelectAllVertex();
-					Faceid++;
+					//Faceid++;
 					return;
 				}
 			}

@@ -102,13 +102,13 @@ namespace Blackdot
 
 	void Viewport::ZoomIn(double zoom)
 	{
-		Zoom *= 1 + zoom;
+		Zoom *= 0.01 + zoom;
 		SetupMatrix();
 	}
 
 	void Viewport::ZoomOut(double zoom)
 	{
-		Zoom /= 1 + zoom;
+		Zoom /= 0.01 + zoom;
 		SetupMatrix();
 	}
 

@@ -25,10 +25,18 @@ If not, see <https://www.gnu.org/licenses/>.
 #include "3D/scene/object/ObjectSystem.hpp"
 #include "3D/scene/mesh/Mesh.hpp"
 
-void	mouseButtonCallback(GLFWwindow* Window, int button, int action, int mods);
+
 
 namespace Blackdot
 {
+/*
+    void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
+    {
+        if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
+             //Editor::mouse.Left = 1;
+        }
+
+    }*/
 
     
 
@@ -45,19 +53,27 @@ namespace Blackdot
 
     public:
 
-        static Mouse	mouse;
+        Editor* editor;
+
+        Mouse	mouse;
 
         Editor();
         ~Editor();
 
         void	InitGL(int w, int h, char* title);   
         
-        void    Mouse(int x, int y);        
+        void    Mouse_pos(int x, int y);        
+
+        static  Mouse mouseLeft();
+
+        void    mouseRight();
         
         void	Key(unsigned char key, int x, int y);
-        void	KeySpec(int key, int x, int y);
+        void	KeySpec(int key);
 
         void    Reshape(int w, int h);
+
+        
 
         void    DrawRun();
 
@@ -70,5 +86,7 @@ namespace Blackdot
     };
 
 }
+
+
 
 #endif
