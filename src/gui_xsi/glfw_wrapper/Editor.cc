@@ -19,14 +19,61 @@ If not, see <https://www.gnu.org/licenses/>.
 #include <iostream>
 #include "Editor.hpp"
 
+
+void mouseButtonCallback(GLFWwindow* Window, int button, int action, int mods)
+{
+	/*
+	mouse.posx=x;
+	mouse.posy=Height-y;
+	mouse.button=button;
+	mouse.state=state;
+	mouse.active=-1;
+	mouse.Alt=mouse.Shift=mouse.Ctrl=0;
+	mouse.Left=mouse.Right=0;
+	mouse.None=1;
+	*/
+
+	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
+
+		double mouseX, mouseY;
+		glfwGetCursorPos(Window, &mouseX, &mouseY);
+
+		int width, height;
+		glfwGetWindowSize(Window, &width, &height);
+
+		mouseY = height - mouseY;
+
+		Blackdot::Mouse(mouseX, mouseY);
+
+
+	}
+
+	switch (button)
+	{
+
+	case GLFW_MOUSE_BUTTON_LEFT:
+		Blackdot::Editor::mouse.Left = 1;
+		break;
+	case GLFW_MOUSE_BUTTON_RIGHT:
+		Blackdot::Editor::mouse.Right = 1;
+		break;
+	}
+
+}
+
+Blackdot::Mouse Blackdot::Editor::mouse;
+
 namespace Blackdot
 {
 
+
 Editor::Editor()
 {
-	mouse.active= mouse.button= mouse.clicx= mouse.clicy= -1;
-	mouse.MouseIs= mouse.posx= mouse.posy= mouse.state= mouse.x= mouse.y=-1;
-	mouse.Alt=mouse.Shift=mouse.Ctrl=0;
+	mouse.active = mouse.button = mouse.clicx = mouse.clicy = -1;
+	mouse.MouseIs = mouse.posx = mouse.posy = mouse.state = mouse.x = mouse.y = -1;
+	mouse.Alt = mouse.Shift = mouse.Ctrl = 0;
+	mouse.x = mouse.y = 0;
+	
 }
 
 Editor::~Editor()
@@ -53,8 +100,10 @@ void Editor::InitGL(int w, int h, char* title)
 
     glfwMakeContextCurrent(window);
 
+
+
     
-    glfwSetMouseButtonCallback(window, Blackdot::mouseButtonCallback);
+    glfwSetMouseButtonCallback(window, mouseButtonCallback);
 
     
     glClearColor(0.35f, 0.35f, 0.35f, 1.0f); 
@@ -104,6 +153,7 @@ void Editor::Key(unsigned char key, int x, int y)
 	}
 }
 
+/*
 void Editor::KeySpec(int key, int x, int y)
 {
 	switch(key)
@@ -136,6 +186,7 @@ void Editor::KeySpec(int key, int x, int y)
 	}
 
 }
+*/
 
 
 void Editor::Mouse(int x, int y)
@@ -150,66 +201,6 @@ void Editor::Mouse(int x, int y)
 	vs.Mouse(mouse.x, mouse.y);		
 }
 
-void mouseButtonCallback(GLFWwindow* Window, int button, int action, int mods)
-{
-	/*
-	mouse.posx=x;
-	mouse.posy=Height-y;
-	mouse.button=button;
-	mouse.state=state;
-	mouse.active=-1;
-	mouse.Alt=mouse.Shift=mouse.Ctrl=0;
-	mouse.Left=mouse.Right=0;
-	mouse.None=1;	
-	*/
-
-	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
-       
-        double mouseX, mouseY;
-        glfwGetCursorPos(Window, &mouseX, &mouseY);
-
-		int width, height;       
-        glfwGetWindowSize(Window, &width, &height);
-
-	    mouseY = height - mouseY;
-
-	    Mouse(mouseX, mouseY);
-
-
-	}
-
-
-	
-	if(glutGetModifiers() & GLUT_ACTIVE_SHIFT)
-	{
-		mouse.active=GLUT_ACTIVE_SHIFT;
-		mouse.Shift=1;
-		mouse.None=0;
-	}
-	if(glutGetModifiers() & GLUT_ACTIVE_CTRL)
-	{
-		mouse.active=GLUT_ACTIVE_CTRL;
-		mouse.Ctrl=1;
-		mouse.None=0;
-	}
-	if(glutGetModifiers() & GLUT_ACTIVE_ALT)
-	{
-		mouse.active=GLUT_ACTIVE_ALT;
-		mouse.Alt=1;
-		mouse.None=0;
-	}
-
-	switch(button)
-	{
-	
-	case GLFW_MOUSE_BUTTON_LEFT:mouse.Left=1;
-		break;
-	case GLFW_MOUSE_BUTTON_RIGHT:mouse.Right=1;
-		break;
-	}
-	
-}
-
 void Editor::Reshape(int w, int h)
 {
 	if(h == 0) h = 1;
@@ -218,6 +209,16 @@ void Editor::Reshape(int w, int h)
 	Height=h;
 
 	vs.Reshape(w, h);	//la on avertis ViewportSystem des nouvelle dimmension
+}
+
+void Editor::DrawRun()
+{
+	while (!glfwWindowShouldClose(window)) {
+		Draw();
+		glfwPollEvents();
+	}
+
+	glfwTerminate();
 }
 
 void Editor::Draw()
@@ -251,15 +252,15 @@ void Editor::Draw()
 	vs.DrawContour();	
 
 	
-	glutSwapBuffers();
+	glfwSwapBuffers(window);
 }
 
 void Editor::DrawScene()
 {
 	objectsystem.Draw();				
-	DrawAxes();
+	//DrawAxes();
 }
-
+/*
 void Editor::Msg()
 {
 	if(mouse.state==GLUT_DOWN)
@@ -321,6 +322,6 @@ void Editor::ResetMouse()
 	mouse.Alt=mouse.Shift=mouse.Ctrl=0;
 	mouse.Left=mouse.Right=0;
 	mouse.None=1;
-}
+}*/
 
 }

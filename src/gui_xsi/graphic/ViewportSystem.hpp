@@ -19,13 +19,16 @@ If not, see <https://www.gnu.org/licenses/>.
 #ifndef __ViewportSystem_hpp
 #define __ViewportSystem_hpp
 
-#include "Viewport.h"
+#include "Mouse.hpp"
+#include "Viewport.hpp"
+
 
 namespace Blackdot
 {
 
     class ViewportSystem
     {
+       
         int		MouseIs;			
         bool	ViewSolo;			
 
@@ -46,7 +49,7 @@ namespace Blackdot
 
         void	LoadOrtho();
 
-        void	LoadSolo();				
+       // void	LoadSolo();				
         void	LoadViewport(int num);	
         void	LoadViewportSolo();		
 
@@ -59,14 +62,14 @@ namespace Blackdot
         Viewport*	GetViewport();		
 
         void	DrawContour();
-        void	DrawRect(Mouse *mouse);
+        void	DrawRect(Blackdot::Mouse *mouse);
 
         void	ZoomIn(double zoom);
         void	ZoomOut(double zoom);
 
         void	ResetRotate(int axis);	
         void	Rotate(int axis, double val);
-        void	Center(Mouse *mouse);
+        void	Center(Blackdot::Mouse *mouse);
 
         void	SetRender(int render);
         void	SetCullFace(bool CullFace);

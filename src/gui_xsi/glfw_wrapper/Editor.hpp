@@ -20,18 +20,21 @@ If not, see <https://www.gnu.org/licenses/>.
 #define __Editor_hpp
 
 #include <GLFW/glfw3.h>
-#include "graphic/ViewportSystem.hpp"
+#include "gui_xsi/graphic/ViewportSystem.hpp"
+#include "gui_xsi/graphic/Mouse.hpp"
 #include "3D/scene/object/ObjectSystem.hpp"
 #include "3D/scene/mesh/Mesh.hpp"
+
+void	mouseButtonCallback(GLFWwindow* Window, int button, int action, int mods);
 
 namespace Blackdot
 {
 
-    void	mouseButtonCallback(GLFWwindow* Window, int button, int action, int mods);
+    
 
     class Editor
     {
-        Mouse	mouse;
+        
         ViewportSystem	vs;
         ObjectSystem	objectsystem;
         Mesh mesh;
@@ -41,6 +44,9 @@ namespace Blackdot
         GLFWwindow* window;
 
     public:
+
+        static Mouse	mouse;
+
         Editor();
         ~Editor();
 
@@ -52,6 +58,8 @@ namespace Blackdot
         void	KeySpec(int key, int x, int y);
 
         void    Reshape(int w, int h);
+
+        void    DrawRun();
 
         void	Draw();
         void	DrawScene();

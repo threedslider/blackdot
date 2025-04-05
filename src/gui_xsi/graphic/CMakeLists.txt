@@ -5,6 +5,7 @@ ViewportSystem.hpp
 )
 
 set(SRCS
+Mouse.cc
 Viewport.cc
 ViewportSystem.cc
 )

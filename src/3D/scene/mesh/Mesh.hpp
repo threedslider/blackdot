@@ -52,14 +52,14 @@ namespace Blackdot
             }
         
            
-            void addFace(const std::vector<int>& edgeIndices) {
+            /*void addFace(const std::vector<int>& edgeIndices) {
                 int id = faces.size() + 1;  
                 Face face(id);
                 for (int edgeIndex : edgeIndices) {
                     face.addEdge(edges[edgeIndex]);
                 }
                 faces.push_back(face);
-            }
+            }*/
         
             
             void print() {

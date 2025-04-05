@@ -20,43 +20,48 @@ If not, see <https://www.gnu.org/licenses/>.
 
 #include "Mouse.hpp"
 
-class Viewport
+namespace Blackdot
 {
-public:
-	int		RenderMode;	
-	bool	CullFace;	
 
-	int		viewport[4];
-	double	proj[16];
-	double	model[16];
-	double	Rot[3];
-	double	Center[3];
+	class Viewport
+	{
+	public:
+		int		RenderMode;
+		bool	CullFace;
 
-	double	Zoom;
+		int		viewport[4];
+		double	proj[16];
+		double	model[16];
+		double	Rot[3];
+		double	Center[3];
 
-	Viewport();
-	~Viewport();
+		double	Zoom;
 
-	void	LoadViewport();					
+		Viewport();
+		~Viewport();
 
-	void	SetupMatrix();
-	void	SetupModelMatrix();
+		void	LoadViewport();
 
-	void	SetViewport(int x, int y, int w, int h, double cx=0, double cy=0, double cz=0);
+		void	SetupMatrix();
+		void	SetupModelMatrix();
 
-	void	ZoomIn(double zoom);			
-	void	ZoomOut(double zoom);
+		void	SetViewport(int x, int y, int w, int h, double cx = 0, double cy = 0, double cz = 0);
 
-	void	SetRot(int axis, double val);	
-	void	SetRot(double x, double y, double z);
+		void	ZoomIn(double zoom);
+		void	ZoomOut(double zoom);
 
-	bool	IsWin(int x, int y);			/
-	void	DrawBord();						
+		void	SetRot(int axis, double val);
+		void	SetRot(double x, double y, double z);
 
-	void	SetCenter(Mouse *mouse);		
+		bool	IsWin(int x, int y); 
+		void	DrawBord();
 
-	void	LoadRender();
-	void	SetRender(int render);
-	void	SetCullFace(bool cullface);
-};
+		void	SetCenter(Blackdot::Mouse* mouse);
+
+		void	LoadRender();
+		void	SetRender(int render);
+		void	SetCullFace(bool cullface);
+	};
+
+}
 #endif//_VIEWPORT_H

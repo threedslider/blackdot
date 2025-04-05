@@ -23,7 +23,7 @@ Laurent Le Flem
 August 06 2024 (My great day !)
 */
 
-#include "gui_xsi/graphic/InitGL.hpp"
+#include "gui_xsi/glfw_wrapper/Editor.hpp"
 #include "tool/Vector.hpp"
 #include "tool/3D/Vertex.hpp"
 #include "tool/3D/Edge.hpp"
@@ -33,10 +33,19 @@ August 06 2024 (My great day !)
 using namespace Blackdot;
 
 int main() {
-    
-    Mesh mesh;
 
-    
+    Editor editor;
+
+    editor.InitGL(800, 600, (char*) "Blackdot : 3D Editor");
+
+    editor.DrawRun();
+
+    return 0;
+
+
+    //Mesh mesh;
+
+    /*
     mesh.addVertex(-1.0f, -1.0f, -1.0f);  // Vertex 1
     mesh.addVertex( 1.0f, -1.0f, -1.0f);  // Vertex 2
     mesh.addVertex( 1.0f,  1.0f, -1.0f);  // Vertex 3
@@ -70,6 +79,7 @@ int main() {
 
     
     mesh.print();
+    */
 
-    return 0;
+    //return 0;
 }
