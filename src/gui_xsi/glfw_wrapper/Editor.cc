@@ -82,9 +82,6 @@ Editor::~Editor()
 
 void Editor::InitGL(int w, int h, char* title)
 {
-	glClearColor(.6,.6,.6, 1);
-	
-
 	if (!glfwInit()) {
         std::cerr << "Cannot for the initialization of GLFW" << std::endl;
         exit(EXIT_FAILURE);
@@ -103,13 +100,20 @@ void Editor::InitGL(int w, int h, char* title)
 
 
     
-    glfwSetMouseButtonCallback(window, mouseButtonCallback);
+   
 
     
-    glClearColor(0.35f, 0.35f, 0.35f, 1.0f); 
-	Width = w;
-	Height = h;
+	glClearColor(.6, .6, .6, 1);
+	//Width = w;
+	//Height = h;
+
+	//int width, height;
+	//glfwGetWindowSize(window, &width, &height);
+
 	vs.Init(w, h);
+
+	glfwSetMouseButtonCallback(window, mouseButtonCallback);
+
 	glEnable(GL_DEPTH_TEST); 
 
 }
@@ -214,7 +218,18 @@ void Editor::Reshape(int w, int h)
 void Editor::DrawRun()
 {
 	while (!glfwWindowShouldClose(window)) {
+
 		Draw();
+		int width, height;
+		glfwGetWindowSize(window, &width, &height);
+
+		if (height == 0) height = 1;
+
+		Width = width;
+		Height = height;
+
+		vs.Reshape(width, height);
+		
 		glfwPollEvents();
 	}
 

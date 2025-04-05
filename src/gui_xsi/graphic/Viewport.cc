@@ -70,7 +70,7 @@ namespace Blackdot
 		glRotatef(Rot[1], 0, 1, 0);
 		glRotatef(Rot[2], 0, 0, 1);
 
-		glTranslated(-Center[0], -Center[0], -Center[0]);
+		glTranslated(-Center[0], -Center[1], -Center[2]);
 		glGetDoublev(GL_MODELVIEW_MATRIX, model);
 	}
 

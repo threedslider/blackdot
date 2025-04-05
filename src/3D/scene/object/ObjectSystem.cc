@@ -26,6 +26,7 @@ namespace Blackdot
 ObjectSystem::ObjectSystem()
 {
 	cmpFace=0;
+	tmpFace[0] = tmpFace[1] = tmpFace[2] = 0;
 }
 
 ObjectSystem::~ObjectSystem()
